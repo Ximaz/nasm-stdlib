@@ -4,7 +4,7 @@ if [[ "${1}" = "" ]]; then
     exit 1
 fi
 
-nasm -f elf64 "${1}.asm" -o "${1}.o" -i ./lib/
+nasm -f elf64 "${1}.asm" -o "${1}.o" -i ./stdlib/
 ld "${1}.o" -o "${1}" -O3
 rm "${1}.o"
 exit 0
