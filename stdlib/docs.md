@@ -22,4 +22,8 @@ _STD_STREAM_CREATE(const char\* buffer_path, const int octal_permissions) -> rax
 
 _STD_STREAM_WRITE(const char\* fd, const char* buffer) -> void
 
+_STD_STREAM_READ(const char\* fd, const int buffer_size) -> rax
+
+_STD_STREAM_SET_CURSOR_TO(const char\* fd, const int position) -> void
+
 _STD_STREAM_CLOSE(const char\* fd) -> void

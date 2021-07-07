@@ -6,12 +6,15 @@ section .data
     ; test_string db "We think in generalities, but we live in details.",0xd,0xa,0x0
     test_string db "T",0x0
     filename db "filename.txt",0x0
+
 section .text
     global _start
+
 _create_file:
-    _STD_STREAM_CREATE filename
+    _STD_STREAM_CREATE filename, 0644o
+
 _start:
-    _STD_STREAM_OPEN filename, _SF_READ_AND_WRITE, 0777o
+    _STD_STREAM_OPEN filename, _SF_READ_AND_WRITE, 0644o
     cmp rax, _STD_STREAM_ERR_OPEN
     jz _create_file
 

@@ -68,9 +68,9 @@ _STD_STREAM_ERR_OPEN equ 0xfffffffffffffffe
     lea rax, [rsi]
 %endmacro
 
-%macro _STD_STREAM_CREATE 1
+%macro _STD_STREAM_CREATE 2
     mov rsi, _SF_CREATE+_SF_WRITE_ONLY
-    _STD_STREAM_OPEN %1, rsi, 0644o
+    _STD_STREAM_OPEN %1, rsi, %2
 %endmacro
 
 %macro _STD_STREAM_CLOSE 1
