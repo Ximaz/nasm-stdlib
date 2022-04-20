@@ -71,7 +71,7 @@ SEEK_END equ 2 ; Sets the cursor backwards from the end back to the offset.
 
 ; --------------------------------------------------------------------------------
 ; (int const err: rax) lseek(int const file_descriptor: di,
-;                            SEEK_<SET|CUR|END> const referer: rdx,
+;                            SEEK_<SET|CUR|END> const referer: dl,
 ;                            int const offset: rsi);
 ; --------------------------------------------------------------------------------
 lseek:

@@ -10,6 +10,6 @@ BITS 64
 ; void exit(int error_code: rdi);
 ; --------------------------------------------------------------------------------
 exit:
-    mov rax, SYS_EXIT
+    mov ax, SYS_EXIT
     syscall
     ret
