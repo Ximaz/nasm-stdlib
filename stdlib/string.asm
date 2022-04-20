@@ -16,11 +16,11 @@ __strlen_counter_end:          ;
 
 ; --------------------------------------------------------------------------------
 ; (char *substring: rax) substr(char *buffer: rsi,
-;                               unsigned int start: rbx,
-;                               unsigned int span: rcx);
+;                               unsigned int start: rcx,
+;                               unsigned int span: rdx);
 ; --------------------------------------------------------------------------------
 substr:
     mov rax, rsi          ; rax = rsi
-    add rax, rbx          ; rax = rax[rbx:]
-    mov [rax+rcx], word 0 ; rax = rax[:rbx+rcx]
+    add rax, rdx          ; rax = rax[rcx:]
+    mov [rax+rcx], word 0 ; rax = rax[:rcx+rdx]
     ret
