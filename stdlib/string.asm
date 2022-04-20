@@ -9,11 +9,9 @@ __strlen_counter_start:        ; while (1) {
     inc rcx                    ;     rcx++
     cmp byte [rsi+rcx], 0      ;     if (rsi[rcx] != 0)
     jnz __strlen_counter_start ;         continue;
-                               ;     else
-__strlen_counter_end:          ;     {
-    dec rcx                    ;         rcx--;
-    ret                        ;         break;
-                               ;     }
+__strlen_counter_end:          ;
+    dec rcx                    ;     rcx--;
+    ret                        ;     break;
                                ; }
 
 ; --------------------------------------------------------------------------------
