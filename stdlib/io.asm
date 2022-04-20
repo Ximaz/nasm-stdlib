@@ -5,12 +5,15 @@ STDOUT equ 1
 STDERR equ 2
 
 ; --------------------------------------------------------------------------------
-; void stdin(char *buffer: rsi, unsigned int const length: rdx);
+; (unsigned int const read_bytes: rax) stdin(char *buffer: rsi,
+;                                            unsigned int const length: rdx);
 ; --------------------------------------------------------------------------------
 stdin:
     mov rdi, STDIN
     mov rax, SYS_READ
     syscall
+    dec rax
+    mov [rsi+rax], byte 0
     ret
 
 ; --------------------------------------------------------------------------------
