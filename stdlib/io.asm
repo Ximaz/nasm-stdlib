@@ -5,16 +5,12 @@ STDOUT equ 1
 STDERR equ 2
 
 ; --------------------------------------------------------------------------------
-; (char *buffer: rax) stdin(unsigned int length: rdx);
+; void stdin(char *buffer: rsi, unsigned int const length: rdx);
 ; --------------------------------------------------------------------------------
 stdin:
     mov rdi, STDIN
     mov rax, SYS_READ
-    sub rsp, rdx
-    mov rsi, rsp
     syscall
-    add rsp, rdx
-    lea rax, [rsi]
     ret
 
 ; --------------------------------------------------------------------------------

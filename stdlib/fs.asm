@@ -45,15 +45,6 @@ close:
     ret
 
 ; --------------------------------------------------------------------------------
-; (int const file_descriptor: rax) create(char const *path: rdi,
-;                                         int const unix_octal_permissions: rdx);
-; --------------------------------------------------------------------------------
-create:
-    mov rsi, O_CREAT+O_WRONLY
-    call open
-    ret
-
-; --------------------------------------------------------------------------------
 ; void write(int const file_descriptor: rdi, char const *buffer: rsi);
 ; --------------------------------------------------------------------------------
 write:
@@ -64,16 +55,13 @@ write:
     ret
 
 ; --------------------------------------------------------------------------------
-; (char *buffer: rax) read(int const file_descriptor: rdi,
-;                          unsigned int const length: rdx);
+; void read(char *buffer: rsi,
+;           int const file_descriptor: rdi,
+;           unsigned int const length: rdx);
 ; --------------------------------------------------------------------------------
 read:
-    sub rsp, rdx
     mov rax, SYS_READ
-    mov rsi, rsp
     syscall
-    add rsp, rdx
-    lea rax, [rsi]
     ret
 
 ; --------------------------------------------------------------------------------
