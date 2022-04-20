@@ -37,7 +37,7 @@ open:
     ret
 
 ; --------------------------------------------------------------------------------
-; void close(int const file_descriptor: rdi);
+; (int const err: rax) close(int const file_descriptor: rdi);
 ; --------------------------------------------------------------------------------
 close:
     mov rax, SYS_CLOSE
