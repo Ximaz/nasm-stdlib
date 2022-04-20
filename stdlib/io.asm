@@ -17,7 +17,7 @@ stdin:
     ret
 
 ; --------------------------------------------------------------------------------
-; void stdout(char const *buffer: rsi);
+; (unsigned int const written_bytes: rax) stdout(char const *buffer: rsi);
 ; --------------------------------------------------------------------------------
 stdout:
     call strlen
@@ -28,7 +28,7 @@ stdout:
     ret
 
 ; --------------------------------------------------------------------------------
-; void stderr(char const *buffer: rsi);
+; (unsigned int const written_bytes: rax) stderr(char const *buffer: rsi);
 ; --------------------------------------------------------------------------------
 stderr:
     call strlen
