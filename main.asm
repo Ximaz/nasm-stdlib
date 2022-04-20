@@ -28,7 +28,7 @@ _start:
     mov rdi, rax
 
     ; Write the data into the file.
-    mov rsi, data
+    lea rsi, [data]
     call write
 
     ; Close the file.
