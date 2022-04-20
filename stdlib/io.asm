@@ -12,8 +12,8 @@ stdin:
     mov rdi, STDIN
     mov rax, SYS_READ
     syscall
-    dec rax
-    mov [rsi+rax], byte 0
+    dec rax               ; Handle the '\n' at the inputted string.
+    mov [rsi+rax], byte 0 ; Puts a null byte at the '\n' position.
     ret
 
 ; --------------------------------------------------------------------------------
