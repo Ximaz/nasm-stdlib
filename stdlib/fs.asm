@@ -65,11 +65,11 @@ read:
     ret
 
 ; --------------------------------------------------------------------------------
-; void seek_to(int const file_descriptor: rdi,
-;              unsigned int const position: rdx);
+; (int const err: rax) seek_to(int const file_descriptor: rdi,
+;                              unsigned int const referer: rdx,
+;                              unsigned int const offset: rsi);
 ; --------------------------------------------------------------------------------
 seek_to:
     mov rax, SYS_LSEEK
-    mov rsi, 0
     syscall
     ret
