@@ -8,7 +8,7 @@
 NAME=main
 # FMT : obj, bin, elf, elf64, macho, macho64, etc...
 FMT=elf64
-DEBUG_FLAGS=-F dwarf -g
+DEBUG_FLAGS=-F stabs -g
 
 $(NAME): $(NAME).o
 	ld $(NAME).o -o $(NAME)

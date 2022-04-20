@@ -27,40 +27,41 @@ _FS_LARGEFILE equ 0
 _FS_ERR_OPEN equ 0xfffffffffffffffe
 
 ; --------------------------------------------------------------------------------
-; (int const file_descriptor: rax) open(char const *path: rdi,
+; (int const file_descriptor: di) open(char const *path: rdi,
 ;                                       O_<MODE> const modes: rsi,
-;                                       int const unix_octal_permissions: rdx);
+;                                       int const unix_octal_permissions: dx);
 ; --------------------------------------------------------------------------------
 open:
-    mov rax, SYS_OPEN
+    mov ax, SYS_OPEN
     syscall
+    mov di, ax
     ret
 
 ; --------------------------------------------------------------------------------
-; (int const err: rax) close(int const file_descriptor: rdi);
+; (int const err: rax) close(int const file_descriptor: di);
 ; --------------------------------------------------------------------------------
 close:
-    mov rax, SYS_CLOSE
+    mov ax, SYS_CLOSE
     syscall
     ret
 
 ; --------------------------------------------------------------------------------
-; void write(int const file_descriptor: rdi, char const *buffer: rsi);
+; void write(int const file_descriptor: di, char const *buffer: rsi);
 ; --------------------------------------------------------------------------------
 write:
     call strlen
     mov rdx, rcx
-    mov rax, SYS_WRITE
+    mov ax, SYS_WRITE
     syscall
     ret
 
 ; --------------------------------------------------------------------------------
 ; (unsigned int const read_bytes: rax) read(char *buffer: rsi,
-;                                           int const file_descriptor: rdi,
+;                                           int const file_descriptor: di,
 ;                                           unsigned int const length: rdx);
 ; --------------------------------------------------------------------------------
 read:
-    mov rax, SYS_READ
+    mov ax, SYS_READ
     syscall
     ret
 
@@ -69,11 +70,11 @@ SEEK_CUR equ 1 ; Sets the cursor starting from current position to the offset.
 SEEK_END equ 2 ; Sets the cursor backwards from the end back to the offset.
 
 ; --------------------------------------------------------------------------------
-; (int const err: rax) lseek(int const file_descriptor: rdi,
+; (int const err: rax) lseek(int const file_descriptor: di,
 ;                            SEEK_<SET|CUR|END> const referer: rdx,
 ;                            int const offset: rsi);
 ; --------------------------------------------------------------------------------
 lseek:
-    mov rax, SYS_LSEEK
+    mov ax, SYS_LSEEK
     syscall
     ret

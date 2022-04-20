@@ -20,12 +20,9 @@ _start:
 
     ; Create the file.
     mov rdi, filename
-    mov rsi, O_CREAT+O_WRONLY
-    mov rdx, 0664o
+    mov rsi, O_CREAT + O_WRONLY
+    mov dx, 0644o
     call open
-
-    ; Store the file descriptor.
-    mov rdi, rax
 
     ; Write the data into the file.
     mov rsi, data
