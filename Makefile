@@ -10,11 +10,11 @@ NAME=main
 FMT=elf64
 DEBUG_FLAGS=-F dwarf -g
 
-$(NAME).o:
-	nasm -f$(FMT) $(DEBUG_FLAGS) $(NAME).asm -o $(NAME).o
-
 $(NAME): $(NAME).o
 	ld $(NAME).o -o $(NAME)
+
+$(NAME).o: $(NAME).asm
+	nasm -f$(FMT) $(DEBUG_FLAGS) $(NAME).asm -o $(NAME).o
 
 all: $(NAME)
 
