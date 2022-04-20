@@ -25,13 +25,13 @@ _start:
     call open
 
     ; Write the data into the file.
-    mov rsi, data
+    lea rsi, [data]
     call write
 
     ; Close the file.
     call close
 
     ; Exit the program
-	xor rdi, rdi
+	xor dl, dl
 	call exit
     ret

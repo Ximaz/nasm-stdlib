@@ -34,6 +34,7 @@ _FS_ERR_OPEN equ 0xfffffffffffffffe
 open:
     mov ax, SYS_OPEN
     syscall
+    xor rdi, rdi
     mov di, ax
     ret
 

@@ -10,7 +10,6 @@ __strlen_counter_start:              ; while (1) {
     cmp byte [rsi+rcx], 0            ;     if (rsi[rcx] != 0)
     jnz short __strlen_counter_start ;         continue;
 __strlen_counter_end:                ;
-    dec rcx                          ;     rcx--;
     ret                              ;     break;
                                      ; }
 
