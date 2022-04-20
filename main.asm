@@ -6,7 +6,7 @@ section .data
     data db "This is my file content", 0
 
 section .bss
-    filename_length equ 10 ; 3 chars + 2 extra chars
+    filename_length equ 10
     filename resb filename_length
 
 section .text
@@ -28,8 +28,8 @@ _start:
     mov rdi, rax
 
     ; Write the data into the file.
-    ; mov rsi, data
-    ; call write
+    mov rsi, data
+    call write
 
     ; Close the file.
     call close
