@@ -27,9 +27,9 @@ _FS_LARGEFILE equ 0
 _FS_ERR_OPEN equ 0xfffffffffffffffe
 
 ; --------------------------------------------------------------------------------
-; (int const file_descriptor: di) open(char const *path: rdi,
-;                                       O_<MODE> const modes: rsi,
-;                                       int const unix_octal_permissions: dx);
+; (int file_descriptor: di) open(char *path: rdi,
+;                                O_<MODE> modes: rsi,
+;                                int unix_octal_permissions: dx);
 ; --------------------------------------------------------------------------------
 open:
     mov ax, SYS_OPEN
@@ -38,7 +38,7 @@ open:
     ret
 
 ; --------------------------------------------------------------------------------
-; (int const err: rax) close(int const file_descriptor: di);
+; (int err: rax) close(int file_descriptor: di);
 ; --------------------------------------------------------------------------------
 close:
     mov ax, SYS_CLOSE
@@ -46,7 +46,7 @@ close:
     ret
 
 ; --------------------------------------------------------------------------------
-; void write(int const file_descriptor: di, char const *buffer: rsi);
+; void write(int file_descriptor: di, char *buffer: rsi);
 ; --------------------------------------------------------------------------------
 write:
     call strlen
@@ -56,9 +56,9 @@ write:
     ret
 
 ; --------------------------------------------------------------------------------
-; (unsigned int const read_bytes: rax) read(char *buffer: rsi,
-;                                           int const file_descriptor: di,
-;                                           unsigned int const length: rdx);
+; (unsigned int read_bytes: rax) read(char *buffer: rsi,
+;                                           int file_descriptor: di,
+;                                           unsigned int length: rdx);
 ; --------------------------------------------------------------------------------
 read:
     mov ax, SYS_READ
@@ -70,9 +70,9 @@ SEEK_CUR equ 1 ; Sets the cursor starting from current position to the offset.
 SEEK_END equ 2 ; Sets the cursor backwards from the end back to the offset.
 
 ; --------------------------------------------------------------------------------
-; (int const err: rax) lseek(int const file_descriptor: di,
-;                            SEEK_<SET|CUR|END> const referer: dl,
-;                            int const offset: rsi);
+; (int err: rax) lseek(int file_descriptor: di,
+;                            SEEK_<SET|CUR|END> referer: dl,
+;                            int offset: rsi);
 ; --------------------------------------------------------------------------------
 lseek:
     mov ax, SYS_LSEEK

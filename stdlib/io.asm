@@ -5,11 +5,11 @@ STDOUT equ 1
 STDERR equ 2
 
 ; --------------------------------------------------------------------------------
-; (unsigned int const read_bytes: rax) stdin(char *buffer: rsi,
-;                                            unsigned int const length: rdx);
+; (unsigned int read_bytes: rax) stdin(char *buffer: rsi,
+;                                      unsigned int length: rdx);
 ; --------------------------------------------------------------------------------
 stdin:
-    mov rdi, STDIN
+    mov di, STDIN
     mov ax, SYS_READ
     syscall
     dec rax               ; Handle the '\n' at the inputted string.
@@ -17,23 +17,23 @@ stdin:
     ret
 
 ; --------------------------------------------------------------------------------
-; (unsigned int const written_bytes: rax) stdout(char const *buffer: rsi);
+; (unsigned int written_bytes: rax) stdout(char *buffer: rsi);
 ; --------------------------------------------------------------------------------
 stdout:
     call strlen
     mov rdx, rcx
-    mov rdi, STDOUT
+    mov di, STDOUT
     mov ax, SYS_WRITE
     syscall
     ret
 
 ; --------------------------------------------------------------------------------
-; (unsigned int const written_bytes: rax) stderr(char const *buffer: rsi);
+; (unsigned int written_bytes: rax) stderr(char *buffer: rsi);
 ; --------------------------------------------------------------------------------
 stderr:
     call strlen
     mov rdx, rcx
-    mov rdi, STDERR
+    mov di, STDERR
     mov ax, SYS_WRITE
     syscall
     ret
