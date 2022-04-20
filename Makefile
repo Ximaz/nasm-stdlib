@@ -14,7 +14,7 @@ $(NAME): $(NAME).o
 	ld $(NAME).o -o $(NAME)
 
 $(NAME).o: $(NAME).asm
-	nasm -f$(FMT) -O3 $(DEBUG_FLAGS) $(NAME).asm -o $(NAME).o
+	nasm -f$(FMT) $(DEBUG_FLAGS) $(NAME).asm -o $(NAME).o
 
 all: $(NAME)
 

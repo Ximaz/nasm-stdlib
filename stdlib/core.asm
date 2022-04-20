@@ -12,4 +12,4 @@ BITS 64
 exit:
     mov ax, SYS_EXIT
     syscall
-    ret
+    retn

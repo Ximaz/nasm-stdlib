@@ -10,7 +10,7 @@ __strlen_counter_start:              ; while (1) {
     cmp byte [rsi+rcx], 0            ;     if (rsi[rcx] != 0)
     jnz short __strlen_counter_start ;         continue;
 __strlen_counter_end:                ;
-    ret                              ;     break;
+    retn                             ;     break;
                                      ; }
 
 ; --------------------------------------------------------------------------------
@@ -22,4 +22,4 @@ substr:
     mov rax, rsi          ; rax = rsi
     add rax, rdx          ; rax = rax[rcx:]
     mov byte [rax+rcx], 0 ; rax = rax[:rcx+rdx]
-    ret
+    retn

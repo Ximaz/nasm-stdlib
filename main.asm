@@ -34,4 +34,4 @@ _start:
     ; Exit the program
 	xor dl, dl
 	call exit
-    ret
+    retn

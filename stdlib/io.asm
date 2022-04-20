@@ -14,7 +14,7 @@ stdin:
     syscall
     dec rax               ; Handle the '\n' at the inputted string.
     mov [rsi+rax], byte 0 ; Puts a null byte at the '\n' position.
-    ret
+    retn
 
 ; --------------------------------------------------------------------------------
 ; (unsigned int written_bytes: rax) stdout(char *buffer: rsi);
@@ -25,7 +25,7 @@ stdout:
     mov di, STDOUT
     mov ax, SYS_WRITE
     syscall
-    ret
+    retn
 
 ; --------------------------------------------------------------------------------
 ; (unsigned int written_bytes: rax) stderr(char *buffer: rsi);
@@ -36,4 +36,4 @@ stderr:
     mov di, STDERR
     mov ax, SYS_WRITE
     syscall
-    ret
+    retn

@@ -36,7 +36,7 @@ open:
     syscall
     xor rdi, rdi
     mov di, ax
-    ret
+    retn
 
 ; --------------------------------------------------------------------------------
 ; (int err: rax) close(int file_descriptor: di);
@@ -44,7 +44,7 @@ open:
 close:
     mov ax, SYS_CLOSE
     syscall
-    ret
+    retn
 
 ; --------------------------------------------------------------------------------
 ; void write(int file_descriptor: di, char *buffer: rsi);
@@ -54,7 +54,7 @@ write:
     mov rdx, rcx
     mov ax, SYS_WRITE
     syscall
-    ret
+    retn
 
 ; --------------------------------------------------------------------------------
 ; (unsigned int read_bytes: rax) read(char *buffer: rsi,
@@ -64,7 +64,7 @@ write:
 read:
     mov ax, SYS_READ
     syscall
-    ret
+    retn
 
 SEEK_SET equ 0 ; Sets the cursor to the pointed offset.
 SEEK_CUR equ 1 ; Sets the cursor starting from current position to the offset.
@@ -78,4 +78,4 @@ SEEK_END equ 2 ; Sets the cursor backwards from the end back to the offset.
 lseek:
     mov ax, SYS_LSEEK
     syscall
-    ret
+    retn
