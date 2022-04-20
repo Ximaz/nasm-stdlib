@@ -1,29 +1,40 @@
 BITS 64
-default rel
-%include "./syscalls_id.asm"
 
-%macro _STD_IO_OUT 1
-    lea rsi, [%1]
-    push rax
-    _STD_STRLEN rsi
-    mov rdx, rax
-    mov rax, SYS_WRITE
-    mov rdi, 1
-    syscall
-    pop rax
-%endmacro
+STDIN equ 0
+STDOUT equ 1
+STDERR equ 2
 
-%macro _STD_IO_IN 1
-    push rsp
+; --------------------------------------------------------------------------------
+; (char *buffer: rax) stdin(unsigned int length: rdx);
+; --------------------------------------------------------------------------------
+stdin:
+    mov rdi, STDIN
     mov rax, SYS_READ
-    xor rdi, rdi
+    sub rsp, rdx
     mov rsi, rsp
-    mov rdx, %1
     syscall
-    pop rax
-%endmacro
+    add rsp, rdx
+    lea rax, [rsi]
+    ret
 
-%macro _STD_IO_ERR 1
-    _STD_PRINTLN %1
-    _STD_EXIT 1
-%endmacro
+; --------------------------------------------------------------------------------
+; void stdout(char const *buffer: rsi);
+; --------------------------------------------------------------------------------
+stdout:
+    call strlen
+    mov rdx, rcx
+    mov rdi, STDOUT
+    mov rax, SYS_WRITE
+    syscall
+    ret
+
+; --------------------------------------------------------------------------------
+; void stderr(char const *buffer: rsi);
+; --------------------------------------------------------------------------------
+stderr:
+    call strlen
+    mov rdx, rcx
+    mov rdi, STDERR
+    mov rax, SYS_WRITE
+    syscall
+    ret

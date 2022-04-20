@@ -1,5 +1,4 @@
 BITS 64
-default rel
 
 SYS_READ equ 0
 SYS_WRITE equ 1

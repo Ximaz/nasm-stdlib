@@ -1,29 +1,55 @@
 BITS 64
 
-%include "./stdlib/core.asm"
+%include "stdlib/core.asm"
 
 section .data
-    ; test_string db "We think in generalities, but we live in details.",0xd,0xa,0x0
-    test_string db "T",0x0
-    filename db "filename.txt",0x0
+    filename db "my_file.txt", 0
+    data db "This is my file content", 0
 
 section .text
     global _start
 
-_create_file:
-    _STD_STREAM_CREATE filename, 0644o
-
 _start:
-    _STD_STREAM_OPEN filename, _SF_READ_AND_WRITE, 0644o
-    cmp rax, _STD_STREAM_ERR_OPEN
-    jz _create_file
+    ; Create the file.
+    mov rdi, filename
+    mov rsi, O_CREAT+O_WRONLY
+    mov rdx, 0664o
+    call open
 
-    _STD_STREAM_WRITE rax, test_string
-    _STD_STREAM_SET_CURSOR_TO rax, 0
-    push rax
-    _STD_STREAM_READ rax, 0xfff
-    _STD_PRINTLN rax
-    pop rax
-    _STD_STREAM_CLOSE rax
+    ; Store the fd.
+    mov rdi, rax
 
-    _STD_EXIT 0
+    ; Write the data into the file.
+    mov rsi, data
+    call write
+
+    ; Close the file.
+    call close
+
+    ; Create the file.
+    mov rdi, filename
+    mov rsi, O_RDONLY
+    mov rdx, 0664o
+    call open
+
+    ; Store the fd.
+    mov rdi, rax
+
+    ; Read the data into the file.
+    mov rdx, 32
+    call read
+
+    ; Store the data into rsi.
+    mov rsi, rax
+
+    ; Display the data.
+    call stdout
+
+    ; Close the file.
+    call close
+
+    ; Exit the program.
+	mov rax, 60
+	mov rdi, 0
+	syscall
+    ret

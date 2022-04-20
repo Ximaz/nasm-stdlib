@@ -1,0 +1,3 @@
+- Stop using stack decrementation
+  to make a buffer for stdin() and
+  read()
