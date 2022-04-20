@@ -49,7 +49,6 @@ _start:
     call close
 
     ; Exit the program.
-	mov rax, 60
-	mov rdi, 0
-	syscall
+	xor rdi, rdi
+	call exit
     ret
