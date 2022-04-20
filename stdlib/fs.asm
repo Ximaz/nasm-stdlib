@@ -55,9 +55,9 @@ write:
     ret
 
 ; --------------------------------------------------------------------------------
-; void read(char *buffer: rsi,
-;           int const file_descriptor: rdi,
-;           unsigned int const length: rdx);
+; (unsigned int const read_bytes: rax) read(char *buffer: rsi,
+;                                           int const file_descriptor: rdi,
+;                                           unsigned int const length: rdx);
 ; --------------------------------------------------------------------------------
 read:
     mov rax, SYS_READ
