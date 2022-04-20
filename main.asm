@@ -20,7 +20,7 @@ _start:
 
     ; Create the file.
     lea rdi, [filename]
-    mov rsi, O_CREAT+O_DIRECTORY
+    mov rsi, O_CREAT+O_WRONLY
     mov rdx, 0664o
     call open
 
