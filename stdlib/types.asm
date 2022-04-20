@@ -1,14 +1,14 @@
 BITS 64
 
-%define CHAR 1
-%define UCHAR 1
-%define SHORT 4
-%define USHORT 4
-%define INT16 4
-%define UINT16 4
-%define INT32 8
-%define UINT32 8
-%define LONG 8
-%define ULONG 8
-%define LLONG 16
-%define ULLong 16
+__CHAR equ 1
+__UCHAR equ 1
+__SHORT equ 4
+__USHORT equ 4
+__INT16 equ 4
+__UINT16 equ 4
+__INT32 equ 8
+__UINT32 equ 8
+__LONG equ 8
+__ULONG equ 8
+__LLONG equ 16
+__ULLong equ 16

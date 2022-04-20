@@ -57,8 +57,8 @@ write:
 
 ; --------------------------------------------------------------------------------
 ; (unsigned int read_bytes: rax) read(char *buffer: rsi,
-;                                           int file_descriptor: di,
-;                                           unsigned int length: rdx);
+;                                     int file_descriptor: di,
+;                                     unsigned int length: rdx);
 ; --------------------------------------------------------------------------------
 read:
     mov ax, SYS_READ
@@ -71,8 +71,8 @@ SEEK_END equ 2 ; Sets the cursor backwards from the end back to the offset.
 
 ; --------------------------------------------------------------------------------
 ; (int err: rax) lseek(int file_descriptor: di,
-;                            SEEK_<SET|CUR|END> referer: dl,
-;                            int offset: rsi);
+;                      SEEK_<SET|CUR|END> referer: dl,
+;                      int offset: rsi);
 ; --------------------------------------------------------------------------------
 lseek:
     mov ax, SYS_LSEEK

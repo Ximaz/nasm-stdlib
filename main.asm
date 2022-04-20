@@ -6,7 +6,7 @@ section .data
     data db "This is my file content", 0
 
 section .bss
-    filename_length equ UCHAR * 10
+    filename_length equ __UCHAR * 10
     filename resb filename_length
 
 section .text
