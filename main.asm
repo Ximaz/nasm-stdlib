@@ -6,7 +6,7 @@ section .data
     data db "This is my file content", 0
 
 section .bss
-    filename_length equ 10
+    filename_length equ UCHAR * 10
     filename resb filename_length
 
 section .text
@@ -19,7 +19,7 @@ _start:
     call stdin
 
     ; Create the file.
-    lea rdi, [filename]
+    mov rdi, filename
     mov rsi, O_CREAT+O_WRONLY
     mov rdx, 0664o
     call open
@@ -28,7 +28,7 @@ _start:
     mov rdi, rax
 
     ; Write the data into the file.
-    lea rsi, [data]
+    mov rsi, data
     call write
 
     ; Close the file.
