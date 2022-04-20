@@ -64,10 +64,14 @@ read:
     syscall
     ret
 
+SEEK_SET equ 0 ; Sets the cursor to the pointed offset.
+SEEK_CUR equ 1 ; Sets the cursor starting from current position to the offset.
+SEEK_END equ 2 ; Sets the cursor backwards from the end back to the offset.
+
 ; --------------------------------------------------------------------------------
 ; (int const err: rax) lseek(int const file_descriptor: rdi,
-;                              unsigned int const referer: rdx,
-;                              unsigned int const offset: rsi);
+;                            SEEK_<SET|CUR|END> const referer: rdx,
+;                            int const offset: rsi);
 ; --------------------------------------------------------------------------------
 lseek:
     mov rax, SYS_LSEEK
