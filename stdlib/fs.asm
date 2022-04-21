@@ -27,9 +27,15 @@ _FS_LARGEFILE equ 0
 _FS_ERR_OPEN equ 0xfffffffffffffffe
 
 ; --------------------------------------------------------------------------------
-; (int file_descriptor: di) open(char *path: rdi,
-;                                O_<MODE> modes: rsi,
-;                                int unix_octal_permissions: dx);
+; (int fd: di) open(char *path: rdi, O_[MODE] mode: rsi, int unix_permissions: dx);
+;
+; Description :
+;
+; Open a file using the path buffer (rdi), the mode (rsi) and the unix permissions.
+;
+; If the O_CREAT mode is not specified, the unix permissions will be ignored.
+;
+; If an error occured, the fd value's going to be -1 (0xffffffff).
 ; --------------------------------------------------------------------------------
 open:
     mov ax, SYS_OPEN
@@ -39,7 +45,13 @@ open:
     retn
 
 ; --------------------------------------------------------------------------------
-; (int err: rax) close(int file_descriptor: di);
+; (int err: rax) close(int fd: di);
+;
+; Dscription :
+;
+; Close a file using the fd (di).
+;
+; If the fd is wrong, the err value is set to -1. If not, err value is set to 0.
 ; --------------------------------------------------------------------------------
 close:
     mov ax, SYS_CLOSE
@@ -47,7 +59,7 @@ close:
     retn
 
 ; --------------------------------------------------------------------------------
-; void write(int file_descriptor: di, char *buffer: rsi);
+; void write(int fd: di, char *buffer: rsi);
 ; --------------------------------------------------------------------------------
 write:
     call strlen
@@ -58,7 +70,7 @@ write:
 
 ; --------------------------------------------------------------------------------
 ; (unsigned int read_bytes: rax) read(char *buffer: rsi,
-;                                     int file_descriptor: di,
+;                                     int fd: di,
 ;                                     unsigned int length: rdx);
 ; --------------------------------------------------------------------------------
 read:
@@ -72,7 +84,7 @@ SEEK_CUR equ 1 ; Sets the cursor starting from current position to the offset.
 SEEK_END equ 2 ; Sets the cursor backwards from the end back to the offset.
 
 ; --------------------------------------------------------------------------------
-; (int err: rax) lseek(int file_descriptor: di,
+; (int err: rax) lseek(int fd: di,
 ;                      SEEK_<SET|CUR|END> referer: dl,
 ;                      int offset: rsi);
 ; --------------------------------------------------------------------------------

@@ -1,14 +1,12 @@
 BITS 64
 
+; https://www.ibm.com/docs/en/ibm-mq/7.5?topic=platforms-standard-data-types#d175336e213
+
 __CHAR equ 1
-__UCHAR equ 1
-__SHORT equ 4
-__USHORT equ 4
-__INT16 equ 4
-__UINT16 equ 4
-__INT32 equ 8
-__UINT32 equ 8
+__SHORT equ 2
+__INT equ 4
 __LONG equ 8
-__ULONG equ 8
-__LLONG equ 16
-__ULLong equ 16
+__FLOAT equ 4
+__DOUBLE equ 8
+__LONG_DOUBLE equ 16
+__SIZE_T equ 8
