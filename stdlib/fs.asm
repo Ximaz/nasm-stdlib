@@ -90,9 +90,9 @@ read:
     syscall
     retn
 
-SEEK_SET equ 0 ; Sets the cursor to the pointed offset.
-SEEK_CUR equ 1 ; Sets the cursor starting from current position to the offset.
-SEEK_END equ 2 ; Sets the cursor backwards from the end back to the offset.
+SEEK_SET equ 0 ; Absolute context.
+SEEK_CUR equ 1 ; Relative context.
+SEEK_END equ 2 ; EOF context.
 
 ; --------------------------------------------------------------------------------
 ; (__OFF_T err: rax) lseek(__INT fd: di, SEEK_<SET|CUR|END> context: dl, __OFF_T offset: rsi);
