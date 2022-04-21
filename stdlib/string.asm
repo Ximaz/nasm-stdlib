@@ -1,10 +1,14 @@
 BITS 64
 
 ; --------------------------------------------------------------------------------
-; (__INT: rcx) strlen(__CHAR *buffer: rsi);
+; (__SIZE_T length: rcx) strlen(__CHAR *buffer: rsi);
+;
+; Description :
+;
+; Counts the length of the buffer (rsi) and returns the result into rcx.
 ; --------------------------------------------------------------------------------
 strlen:
-    xor rcx, rcx                    ; __INT rcx = 0;
+    xor rcx, rcx                    ; __SIZE_T rcx = 0;
 __strlen_counter:                   ; while (1) {
     inc rcx                         ;     rcx++
     cmp byte [rsi+rcx], 0           ;     if (rsi[rcx] != 0)
@@ -13,7 +17,13 @@ __strlen_counter:                   ; while (1) {
                                     ; }
 
 ; --------------------------------------------------------------------------------
-; (__CHAR *substring: rax) substr(__CHAR *buffer: rsi, __INT start: rcx, __INT span: rdx);
+; (__CHAR *str: rax) substr(__CHAR *buffer: rsi, __SIZE_T start: rcx, __SIZE_T count: rdx);
+;
+; Description :
+;
+; Perform a substring from buffer (rsi) from start (rcx) and goes until count (rdx).
+;
+; The substring is stored into rax.
 ; --------------------------------------------------------------------------------
 substr:
     mov rax, rsi          ; rax = rsi
