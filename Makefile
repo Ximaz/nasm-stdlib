@@ -6,9 +6,19 @@
 ##
 
 NAME=main
-# FMT : obj, bin, elf, elf64, macho, macho64, etc...
-FMT=elf64
+LIBNAME=stdlib
+FMT=elf64# <- : obj, bin, elf, elf64, macho, macho64, etc...
 DEBUG_FLAGS=-F stabs -g
+SRC=stdlib/fs.asm \
+	stdlib/io.asm \
+	stdlib/string.asm \
+	stdlib/sys.asm \
+	stdlib/syscalls_id.asm \
+	stdlib/types.asm
+
+##
+## Building the project :
+##
 
 $(NAME): $(NAME).o
 	ld $(NAME).o -o $(NAME)
@@ -19,7 +29,7 @@ $(NAME).o: $(NAME).asm
 all: $(NAME)
 
 clean:
-	rm -rf $(NAME).o
+	rm -rf $(NAME).o $(LIBNAME).o
 
 fclean: clean
 	rm -rf $(NAME)

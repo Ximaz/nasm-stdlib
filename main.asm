@@ -27,12 +27,17 @@ create_file:
     mov dx, 0644o
     call open
 
-    ; Write the data __INTo the file.
+    ; Write the data into the file.
     mov rsi, data
     call write
 
     ; Close the file.
     call close
+
+    ; Pause the program for 5 seconds
+    mov ecx, __16BITS
+    call sleep
+
 read_file:
     ; Open the file in read-only mode.
     mov rdi, filename
