@@ -52,6 +52,6 @@ pr__INT:
     call stdout
 return:
     ; Exit the program
-	xor dl, dl
+	xor dil, dil
 	call exit
     retn

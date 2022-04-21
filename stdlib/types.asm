@@ -3,6 +3,7 @@ BITS 64
 ; https://www.ibm.com/docs/en/ibm-mq/7.5?topic=platforms-standard-data-types#d175336e213
 
 __CHAR equ 1
+__EXIT_STATUS equ 1 ; [0 - 127] range is recommended.
 __SHORT equ 2
 __INT equ 4
 __LONG equ 8

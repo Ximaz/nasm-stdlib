@@ -7,7 +7,11 @@ BITS 64
 %include "stdlib/io.asm"
 
 ; --------------------------------------------------------------------------------
-; void exit(__INT status: rdi);
+; void exit(__EXIT_STATUS status: dil);
+;
+; Description :
+;
+; Exit the program and return a status code (dil). The recommanded status code range is [0-127].
 ; --------------------------------------------------------------------------------
 exit:
     mov ax, SYS_EXIT
