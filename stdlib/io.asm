@@ -11,6 +11,11 @@ STDERR equ 2
 stdin:
     mov di, STDIN
     call read
+    cmp byte [rsi+rax-1], 10
+    je __stdin_trim_newline
+    mov [rsi+rax], byte 0
+    retn
+__stdin_trim_newline:
     dec rax               ; Handle the '\n' at the inputted string.
     mov [rsi+rax], byte 0 ; Puts a null byte at the '\n' position.
     retn
