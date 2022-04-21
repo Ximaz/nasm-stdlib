@@ -47,8 +47,8 @@ read_file:
     ; Close the file
     call close
 
-pr__INT:
-    ; Pr__INT the file data.
+print:
+    ; Print the file data.
     call stdout
 return:
     ; Exit the program
