@@ -27,7 +27,7 @@ _FS_LARGEFILE equ 0
 _FS_ERR_OPEN equ 0xfffffffffffffffe
 
 ; --------------------------------------------------------------------------------
-; (__INT fd: dill) open(__CHAR *path: rdi, O_[MODE] mode: rsi, __INT unix_permissions: dx);
+; (__INT fd: dil) open(__CHAR *path: rdi, O_[MODE] mode: rsi, __INT unix_permissions: dx);
 ;
 ; Description :
 ;
