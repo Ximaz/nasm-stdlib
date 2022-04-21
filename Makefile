@@ -2,7 +2,7 @@
 ## Ximaz, 2022
 ## Makefile
 ## File description:
-## Compile the stdlib with an entry po__INT file
+## Compile the stdlib with an entry point file
 ##
 
 NAME=main
