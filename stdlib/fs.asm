@@ -88,7 +88,6 @@ write:
 read:
     mov ax, SYS_READ
     syscall
-    mov [rsi+rax], byte 0 ; Puts a null byte at the last read byte position.
     retn
 
 SEEK_SET equ 0 ; Sets the cursor to the pointed offset.

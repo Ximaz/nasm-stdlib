@@ -10,8 +10,7 @@ STDERR equ 2
 ; --------------------------------------------------------------------------------
 stdin:
     mov di, STDIN
-    mov ax, SYS_READ
-    syscall
+    call read
     dec rax               ; Handle the '\n' at the inputted string.
     mov [rsi+rax], byte 0 ; Puts a null byte at the '\n' position.
     retn
@@ -20,20 +19,14 @@ stdin:
 ; (__INT written_bytes: rax) stdout(__CHAR *buffer: rsi);
 ; --------------------------------------------------------------------------------
 stdout:
-    call strlen
-    mov rdx, rcx
     mov di, STDOUT
-    mov ax, SYS_WRITE
-    syscall
+    call write
     retn
 
 ; --------------------------------------------------------------------------------
 ; (__INT written_bytes: rax) stderr(__CHAR *buffer: rsi);
 ; --------------------------------------------------------------------------------
 stderr:
-    call strlen
-    mov rdx, rcx
     mov di, STDERR
-    mov ax, SYS_WRITE
-    syscall
+    call write
     retn

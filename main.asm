@@ -6,9 +6,9 @@ section .data
     data db "This is my file content", 0
 
 section .bss
-    filename_len equ __UCHAR * 10
+    filename_len equ __CHAR * 10
     filename resb filename_len
-    data_len equ __UCHAR * 24
+    data_len equ __CHAR * 24
     file_data resb data_len
 
 section .text
