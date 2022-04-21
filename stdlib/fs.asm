@@ -41,7 +41,7 @@ open:
     mov ax, SYS_OPEN
     syscall
     xor rdi, rdi
-    mov di, al
+    mov di, ax
     retn
 
 ; --------------------------------------------------------------------------------
