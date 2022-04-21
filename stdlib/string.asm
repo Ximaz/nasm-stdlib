@@ -8,13 +8,13 @@ BITS 64
 ; Counts the length of the buffer (rsi) and returns the result into rcx.
 ; --------------------------------------------------------------------------------
 strlen:
-    xor rcx, rcx                    ; __SIZE_T rcx = 0;
-__strlen_counter:                   ; while (1) {
-    inc rcx                         ;     rcx++
-    cmp byte [rsi+rcx], 0           ;     if (rsi[rcx] != 0)
-    jnz short __strlen_counterstart ;         continue;
-    retn                            ;     break;
-                                    ; }
+    xor rcx, rcx               ; __SIZE_T rcx = 0;
+__strlen_counter:              ; while (1) {
+    inc rcx                    ;     rcx++
+    cmp byte [rsi+rcx], 0      ;     if (rsi[rcx] != 0)
+    jnz short __strlen_counter ;         continue;
+    retn                       ;     break;
+                               ; }
 
 ; --------------------------------------------------------------------------------
 ; (__CHAR *str: rax) substr(__CHAR *buffer: rsi, __SIZE_T start: rcx, __SIZE_T count: rdx);
