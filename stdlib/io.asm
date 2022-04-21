@@ -5,8 +5,8 @@ STDOUT equ 1
 STDERR equ 2
 
 ; --------------------------------------------------------------------------------
-; (unsigned int read_bytes: rax) stdin(char *buffer: rsi,
-;                                      unsigned int length: rdx);
+; (__INT read_bytes: rax) stdin(__CHAR *buffer: rsi,
+;                                      __INT len: rdx);
 ; --------------------------------------------------------------------------------
 stdin:
     mov di, STDIN
@@ -17,7 +17,7 @@ stdin:
     retn
 
 ; --------------------------------------------------------------------------------
-; (unsigned int written_bytes: rax) stdout(char *buffer: rsi);
+; (__INT written_bytes: rax) stdout(__CHAR *buffer: rsi);
 ; --------------------------------------------------------------------------------
 stdout:
     call strlen
@@ -28,7 +28,7 @@ stdout:
     retn
 
 ; --------------------------------------------------------------------------------
-; (unsigned int written_bytes: rax) stderr(char *buffer: rsi);
+; (__INT written_bytes: rax) stderr(__CHAR *buffer: rsi);
 ; --------------------------------------------------------------------------------
 stderr:
     call strlen

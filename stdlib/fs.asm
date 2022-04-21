@@ -27,7 +27,7 @@ _FS_LARGEFILE equ 0
 _FS_ERR_OPEN equ 0xfffffffffffffffe
 
 ; --------------------------------------------------------------------------------
-; (int fd: di) open(char *path: rdi, O_[MODE] mode: rsi, int unix_permissions: dx);
+; (__INT fd: di) open(__CHAR *path: rdi, O_[MODE] mode: rsi, __INT unix_permissions: dx);
 ;
 ; Description :
 ;
@@ -45,7 +45,7 @@ open:
     retn
 
 ; --------------------------------------------------------------------------------
-; (int err: rax) close(int fd: di);
+; (__INT err: rax) close(__INT fd: di);
 ;
 ; Dscription :
 ;
@@ -59,7 +59,15 @@ close:
     retn
 
 ; --------------------------------------------------------------------------------
-; void write(int fd: di, char *buffer: rsi);
+; (__SIZE_T written_bytes: rax) write(__INT fd: di, __CHAR *buffer: rsi);
+;
+; Description :
+;
+; Write bytes from the buffer (rsi) into a fd (di).
+;
+; The bytes len is computer using ``strlen`` call.
+;
+; If an error occured while writting bytes, the written_bytes value is set to -1.
 ; --------------------------------------------------------------------------------
 write:
     call strlen
@@ -69,9 +77,15 @@ write:
     retn
 
 ; --------------------------------------------------------------------------------
-; (unsigned int read_bytes: rax) read(char *buffer: rsi,
-;                                     int fd: di,
-;                                     unsigned int length: rdx);
+; (__INT read_bytes: rax) read(__CHAR *buffer: rsi,
+;                              __INT fd: di,
+;                              __INT len: rdx);
+;
+; Description :
+;
+; Read n bytes (len: rdx) from the fd (di) and store them into the buffer (rsi).
+;
+; If an error occured while reading bytes, the read_bytes value is set to -1.
 ; --------------------------------------------------------------------------------
 read:
     mov ax, SYS_READ
@@ -84,9 +98,18 @@ SEEK_CUR equ 1 ; Sets the cursor starting from current position to the offset.
 SEEK_END equ 2 ; Sets the cursor backwards from the end back to the offset.
 
 ; --------------------------------------------------------------------------------
-; (int err: rax) lseek(int fd: di,
-;                      SEEK_<SET|CUR|END> referer: dl,
-;                      int offset: rsi);
+; (__OFF_T err: rax) lseek(__INT fd: di,
+;                          SEEK_<SET|CUR|END> context: dl,
+;                          __OFF_T offset: rsi);
+;
+; Description :
+;
+; Set the cursor position of an fd (di) according the context which can be :
+; - SEEK_SET : starting from 0,
+; - SEEK_CUR : starting from current position,
+; - SEEK_END : starting from the end going backward.
+;
+; If an error occured while seeking, the err value is set to -1.
 ; --------------------------------------------------------------------------------
 lseek:
     mov ax, SYS_LSEEK

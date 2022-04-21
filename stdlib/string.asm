@@ -1,10 +1,10 @@
 BITS 64
 
 ; --------------------------------------------------------------------------------
-; (unsigned int: rcx) strlen(char *buffer: rsi);
+; (__INT: rcx) strlen(__CHAR *buffer: rsi);
 ; --------------------------------------------------------------------------------
 strlen:
-    xor rcx, rcx                     ; unsigned int rcx = 0;
+    xor rcx, rcx                     ; __INT rcx = 0;
 __strlen_counter_start:              ; while (1) {
     inc rcx                          ;     rcx++
     cmp byte [rsi+rcx], 0            ;     if (rsi[rcx] != 0)
@@ -14,9 +14,9 @@ __strlen_counter_end:                ;
                                      ; }
 
 ; --------------------------------------------------------------------------------
-; (char *substring: rax) substr(char *buffer: rsi,
-;                               unsigned int start: rcx,
-;                               unsigned int span: rdx);
+; (__CHAR *substring: rax) substr(__CHAR *buffer: rsi,
+;                               __INT start: rcx,
+;                               __INT span: rdx);
 ; --------------------------------------------------------------------------------
 substr:
     mov rax, rsi          ; rax = rsi

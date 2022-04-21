@@ -10,3 +10,4 @@ __FLOAT equ 4
 __DOUBLE equ 8
 __LONG_DOUBLE equ 16
 __SIZE_T equ 8
+__OFF_T equ 8
