@@ -77,9 +77,7 @@ write:
     retn
 
 ; --------------------------------------------------------------------------------
-; (__INT read_bytes: rax) read(__CHAR *buffer: rsi,
-;                              __INT fd: di,
-;                              __INT len: rdx);
+; (__INT read_bytes: rax) read(__CHAR *buffer: rsi, __INT fd: di, __INT len: rdx);
 ;
 ; Description :
 ;
@@ -98,9 +96,7 @@ SEEK_CUR equ 1 ; Sets the cursor starting from current position to the offset.
 SEEK_END equ 2 ; Sets the cursor backwards from the end back to the offset.
 
 ; --------------------------------------------------------------------------------
-; (__OFF_T err: rax) lseek(__INT fd: di,
-;                          SEEK_<SET|CUR|END> context: dl,
-;                          __OFF_T offset: rsi);
+; (__OFF_T err: rax) lseek(__INT fd: di, SEEK_<SET|CUR|END> context: dl, __OFF_T offset: rsi);
 ;
 ; Description :
 ;
