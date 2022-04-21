@@ -3,7 +3,6 @@ BITS 64
 %include "stdlib/core.asm"
 
 section .data
-    debug_stage db "DEBUG", 0
     data db "This is my file content", 0
 
 section .bss
