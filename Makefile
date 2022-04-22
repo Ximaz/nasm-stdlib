@@ -21,7 +21,7 @@ SRC=stdlib/fs.asm \
 ##
 
 $(NAME): $(NAME).o
-	ld $(NAME).o -o $(NAME)
+	ld $(NAME).o -O3 -o $(NAME)
 
 $(NAME).o: $(NAME).asm
 	nasm -f$(FMT) -Ox $(DEBUG_FLAGS) $(NAME).asm -o $(NAME).o
