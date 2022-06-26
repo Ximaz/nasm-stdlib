@@ -43,21 +43,21 @@ substr:
 ; The equality statement is stored into al.
 ; --------------------------------------------------------------------------------
 strcmp:
-    xor rax, rax ; char index
-    xor cl, cl   ; s1[rax]
-__strcmp_while:
-    mov cl, [rsi+rax]
-    cmp cl, 0
-    je __strcmp_ret_value
-    cmp byte [rdi+rax], 0
-    je __strcmp_ret_value
-    cmp byte [rdi+rax], cl
-    jne __strcmp_ret_value
-    inc rax
-    jmp __strcmp_while
-__strcmp_ret_value:
-    mov cl, [rsi+rax]
-    mov ch, [rdi+rax]
-    sub cl, ch
-    mov al, cl
+    xor rax, rax           ; size_t rax = 0;
+    xor cl, cl             ; char cl;
+__strcmp_while:            ; while (1) {
+    mov cl, [rsi+rax]      ;    cl = rsi[rax];
+    cmp cl, 0              ;    if (cl == 0)
+    je __strcmp_ret_value  ;        return strcmp_ret_value(rsi, rdi, rax);
+    cmp byte [rdi+rax], 0  ;    if (rdi[rax] == 0)
+    je __strcmp_ret_value  ;        return strcmp_ret_value(rsi, rdi, rax);
+    cmp byte [rdi+rax], cl ;    if (rdi[rax] != cl)
+    jne __strcmp_ret_value ;        return strcmp_ret_value(rsi, rdi, rax);
+    inc rax                ;    rax++;
+    jmp __strcmp_while     ; }
+__strcmp_ret_value:        ; char cl = rsi[rax];
+    mov cl, [rsi+rax]      ; char ch = rdi[rax];
+    mov ch, [rdi+rax]      ; cl -= ch;
+    sub cl, ch             ; rax = cl;
+    mov al, cl             ; return rax;
     retn
