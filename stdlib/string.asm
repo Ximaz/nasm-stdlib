@@ -55,9 +55,8 @@ __strcmp_while:            ; while (1) {
     jne __strcmp_ret_value ;        return strcmp_ret_value(rsi, rdi, rax);
     inc rax                ;    rax++;
     jmp __strcmp_while     ; }
-__strcmp_ret_value:        ; char cl = rsi[rax];
-    mov cl, [rsi+rax]      ; char ch = rdi[rax];
-    mov ch, [rdi+rax]      ; cl -= ch;
-    sub cl, ch             ; rax = cl;
-    mov al, cl             ; return rax;
-    retn
+__strcmp_ret_value:
+    mov cl, [rsi+rax]      ; char cl = rsi[rax];
+    sub cl, byte [rdi+rax] ; cl -= rdi[rax];
+    mov al, cl             ; rax = cl;
+    retn                   ; return rax;
