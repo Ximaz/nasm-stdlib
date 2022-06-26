@@ -3,6 +3,7 @@ BITS 64
 %include "stdlib/core.asm"
 
 section .data
+    prompt_filename db "Enter a filename : ", 0
     data db "This is my file content", 0
 
 section .bss
@@ -14,8 +15,11 @@ section .bss
 section .text
     global _start
 
-_start:
-create_file:
+_create_file:
+    ; Show the prompt
+    mov rsi, prompt_filename
+    call stdout
+
     ; Read filename
     mov rsi, filename
     mov rdx, filename_len
@@ -33,12 +37,9 @@ create_file:
 
     ; Close the file.
     call close
+    retn
 
-    ; Pause the program for 5 seconds
-    mov ecx, __16BITS
-    call sleep
-
-read_file:
+_read_file:
     ; Open the file in read-only mode.
     mov rdi, filename
     mov rsi, O_RDONLY
@@ -51,11 +52,20 @@ read_file:
 
     ; Close the file
     call close
+    retn
 
-print:
+_start:
+    call _create_file
+
+    ; Pause the program for 5 seconds
+    mov rcx, 5000
+    call sleep
+
+    call _read_file
+
     ; Print the file data.
     call stdout
-return:
+
     ; Exit the program
 	xor dil, dil
 	call exit

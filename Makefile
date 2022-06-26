@@ -7,6 +7,7 @@
 
 NAME=main
 LIBNAME=stdlib
+NASM_FLAGS=-O0
 FMT=elf64# <- : obj, bin, elf, elf64, macho, macho64, etc...
 DEBUG_FLAGS=-F stabs -g
 SRC=stdlib/fs.asm \
@@ -24,7 +25,7 @@ $(NAME): $(NAME).o
 	ld $(NAME).o -O3 -o $(NAME)
 
 $(NAME).o: $(NAME).asm
-	nasm -f$(FMT) -Ox $(DEBUG_FLAGS) $(NAME).asm -o $(NAME).o
+	nasm -f$(FMT) $(NASM_FLAGS) $(DEBUG_FLAGS) $(NAME).asm -o $(NAME).o
 
 all: $(NAME)
 
@@ -34,6 +35,6 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 
-re: all clean
+re: fclean all
 
 .PHONY: all clean fclean re
