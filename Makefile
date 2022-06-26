@@ -5,7 +5,7 @@
 ## Compile the stdlib with an entry point file
 ##
 
-NAME=tests/test_strcmp
+NAME=main
 LIBNAME=stdlib
 NASM_FLAGS=-O0
 FMT=elf64# <- : obj, bin, elf, elf64, macho, macho64, etc...
@@ -35,6 +35,6 @@ clean:
 fclean: clean
 	rm -rf $(NAME)
 
-re: fclean all
+re: fclean all clean
 
 .PHONY: all clean fclean re

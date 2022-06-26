@@ -18,9 +18,9 @@ _start:
     call strcmp
 
     cmp al, 0
-    je short _is_equal
-    jl short _is_less
-    jg short _is_greater
+    je _is_equal
+    jl _is_less
+    jg _is_greater
 
 _is_equal:
     mov rsi, is_equal

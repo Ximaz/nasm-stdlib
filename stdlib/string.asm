@@ -12,7 +12,7 @@ strlen:
 __strlen_counter:              ; while (1) {
     inc rcx                    ;     rcx++
     cmp byte [rsi+rcx], 0      ;     if (rsi[rcx] != 0)
-    jnz short __strlen_counter ;         continue;
+    jnz __strlen_counter ;         continue;
     retn                       ;     break;
                                ; }
 
@@ -33,7 +33,7 @@ substr:
 
 
 ; --------------------------------------------------------------------------------
-; (int equality al) strcmp(__CHAR *s1: rsi, __CHAR s2: rdi);
+; (__INT equality al) strcmp(__CHAR *s1: rsi, __CHAR s2: rdi);
 ;
 ; Description :
 ;
@@ -48,13 +48,13 @@ strcmp:
 __strcmp_while:
     mov cl, [rsi+rax]
     cmp cl, 0
-    je short __strcmp_ret_value
+    je __strcmp_ret_value
     cmp byte [rdi+rax], 0
-    je short __strcmp_ret_value
+    je __strcmp_ret_value
     cmp byte [rdi+rax], cl
-    jne short __strcmp_ret_value
+    jne __strcmp_ret_value
     inc rax
-    jmp short __strcmp_while
+    jmp __strcmp_while
 __strcmp_ret_value:
     mov cl, [rsi+rax]
     mov ch, [rdi+rax]

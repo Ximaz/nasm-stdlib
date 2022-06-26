@@ -7,3 +7,5 @@ BITS 64
 %include "stdlib/io.asm"
 %include "stdlib/time.asm"
 %include "stdlib/sys.asm"
+%include "stdlib/math.asm"
+%include "stdlib/assert.asm"

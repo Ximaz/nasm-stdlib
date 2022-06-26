@@ -14,10 +14,10 @@ __sleep_count_all_ms:
 __sleep_count_one_ms:
     inc rax
     cmp rax, 3600000               ; ~ 1 millisecond
-    jne short __sleep_count_one_ms
+    jne __sleep_count_one_ms
     dec rcx
     cmp rcx, 0
-    jne short __sleep_count_all_ms
+    jne __sleep_count_all_ms
 
     pop rax
     retn
