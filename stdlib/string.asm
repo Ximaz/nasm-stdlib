@@ -12,7 +12,7 @@ strlen:
 __strlen_counter:              ; while (1) {
     inc rcx                    ;     rcx++
     cmp byte [rsi+rcx], 0      ;     if (rsi[rcx] != 0)
-    jnz __strlen_counter ;         continue;
+    jnz __strlen_counter       ;         continue;
     retn                       ;     break;
                                ; }
 
