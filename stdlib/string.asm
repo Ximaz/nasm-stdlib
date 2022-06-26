@@ -48,11 +48,11 @@ strcmp:
 __strcmp_while:            ; while (1) {
     mov cl, [rsi+rax]      ;    cl = rsi[rax];
     cmp cl, 0              ;    if (cl == 0)
-    je __strcmp_ret_value  ;        return strcmp_ret_value(rsi, rdi, rax);
+    je __strcmp_ret_value  ;        goto __strcmp_ret_value;
     cmp byte [rdi+rax], 0  ;    if (rdi[rax] == 0)
-    je __strcmp_ret_value  ;        return strcmp_ret_value(rsi, rdi, rax);
+    je __strcmp_ret_value  ;        goto __strcmp_ret_value;
     cmp byte [rdi+rax], cl ;    if (rdi[rax] != cl)
-    jne __strcmp_ret_value ;        return strcmp_ret_value(rsi, rdi, rax);
+    jne __strcmp_ret_value ;        goto __strcmp_ret_value;
     inc rax                ;    rax++;
     jmp __strcmp_while     ; }
 __strcmp_ret_value:
