@@ -12,7 +12,7 @@ STDERR equ 2
 ; Write into the specified buffer (rsi) n bytes (len: rdx) from the standard input.
 ; --------------------------------------------------------------------------------
 stdin:
-    mov di, STDIN
+    mov edi, STDIN
     call read
     cmp byte [rsi+rax-1], 10
     je __stdin_trim_newline
@@ -31,7 +31,7 @@ __stdin_trim_newline:
 ; Write the specified buffer (rsi) into the standard output.
 ; --------------------------------------------------------------------------------
 stdout:
-    mov di, STDOUT
+    mov edi, STDOUT
     call write
     retn
 
@@ -43,6 +43,6 @@ stdout:
 ; Write the specified buffer (rsi) into the standard error.
 ; --------------------------------------------------------------------------------
 stderr:
-    mov di, STDERR
+    mov edi, STDERR
     call write
     retn

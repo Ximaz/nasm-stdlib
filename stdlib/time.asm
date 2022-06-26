@@ -15,7 +15,7 @@ __sleep_count_one_ms:
     inc rax
     cmp rax, 3600000               ; ~ 1 millisecond
     jne short __sleep_count_one_ms
-    sub rcx, 1
+    dec rcx
     cmp rcx, 0
     jne short __sleep_count_all_ms
 

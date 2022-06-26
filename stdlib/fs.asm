@@ -27,7 +27,7 @@ _FS_LARGEFILE equ 0
 _FS_ERR_OPEN equ 0xfffffffffffffffe
 
 ; --------------------------------------------------------------------------------
-; (__INT fd: di) open(__CHAR *path: rdi, O_[MODE] mode: rsi, __INT unix_permissions: dx);
+; (__INT fd: edi) open(__CHAR *path: rdi, O_[MODE] mode: rsi, __INT unix_permissions: dx);
 ;
 ; Description :
 ;
@@ -40,16 +40,16 @@ _FS_ERR_OPEN equ 0xfffffffffffffffe
 open:
     mov ax, SYS_OPEN
     syscall
-    xor rdi, rdi
-    mov di, ax
+    xor edi, edi
+    mov edi, eax
     retn
 
 ; --------------------------------------------------------------------------------
-; (__INT err: rax) close(__INT fd: di);
+; (__INT err: rax) close(__INT fd: edi);
 ;
 ; Dscription :
 ;
-; Close a file using the fd (di).
+; Close a file using the fd (edi).
 ;
 ; If the fd is wrong, the err value is set to -1. If not, err value is set to 0.
 ; --------------------------------------------------------------------------------
@@ -59,11 +59,11 @@ close:
     retn
 
 ; --------------------------------------------------------------------------------
-; (__SIZE_T written_bytes: rax) write(__INT fd: di, __CHAR *buffer: rsi);
+; (__SIZE_T written_bytes: rax) write(__INT fd: edi, __CHAR *buffer: rsi);
 ;
 ; Description :
 ;
-; Write bytes from the buffer (rsi) into a fd (di).
+; Write bytes from the buffer (rsi) into a fd (edi).
 ;
 ; The bytes len is computer using ``strlen`` call.
 ;
@@ -77,11 +77,11 @@ write:
     retn
 
 ; --------------------------------------------------------------------------------
-; (__INT read_bytes: rax) read(__CHAR *buffer: rsi, __INT fd: di, __INT len: rdx);
+; (__INT read_bytes: rax) read(__CHAR *buffer: rsi, __INT fd: edi, __INT len: rdx);
 ;
 ; Description :
 ;
-; Read n bytes (len: rdx) from the fd (di) and store them into the buffer (rsi).
+; Read n bytes (len: rdx) from the fd (edi) and store them into the buffer (rsi).
 ;
 ; If an error occured while reading bytes, the read_bytes value is set to -1.
 ; --------------------------------------------------------------------------------
@@ -95,11 +95,11 @@ SEEK_CUR equ 1 ; Relative context.
 SEEK_END equ 2 ; EOF context.
 
 ; --------------------------------------------------------------------------------
-; (__OFF_T err: rax) lseek(__INT fd: di, SEEK_<SET|CUR|END> context: dl, __OFF_T offset: rsi);
+; (__OFF_T err: rax) lseek(__INT fd: edi, SEEK_<SET|CUR|END> context: dl, __OFF_T offset: rsi);
 ;
 ; Description :
 ;
-; Set the cursor position of an fd (di) according the context which can be :
+; Set the cursor position of an fd (edi) according the context which can be :
 ; - SEEK_SET : starting from 0,
 ; - SEEK_CUR : starting from current position,
 ; - SEEK_END : starting from the end going backward.

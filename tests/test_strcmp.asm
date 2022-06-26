@@ -1,0 +1,40 @@
+BITS 64
+
+%include "stdlib/core.asm"
+
+section .data
+    s1 db "Ceci est une phrase", 0
+    s2 db "Ceci est une phras~", 0
+    is_equal db "_is_equal", 10, 0
+    is_less db "_is_less", 10, 0
+    is_greater db "_is_greater", 10, 0
+
+section .text
+    global _start
+
+_start:
+    mov rsi, s1 ; source
+    mov rdi, s2 ; mask
+    call strcmp
+
+    cmp al, 0
+    je short _is_equal
+    jl short _is_less
+    jg short _is_greater
+
+_is_equal:
+    mov rsi, is_equal
+    jmp _ending
+_is_less:
+    mov rsi, is_less
+    jmp _ending
+_is_greater:
+    mov rsi, is_greater
+    jmp _ending
+_ending:
+    call stdout
+
+    ; Exit the program
+	xor dil, dil
+	call exit
+    retn
