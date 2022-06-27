@@ -1,23 +1,23 @@
 BITS 64
 
 ; --------------------------------------------------------------------------------
-; (__SIZE_T length: rcx) strlen(__CHAR *buffer: rsi);
+; (_SIZE_T length: rcx) strlen(_CHAR *buffer: rsi);
 ;
 ; Description :
 ;
 ; Counts the length of the buffer (rsi) and returns the result into rcx.
 ; --------------------------------------------------------------------------------
 strlen:
-    xor rcx, rcx               ; __SIZE_T rcx = 0;
-__strlen_counter:              ; while (1) {
+    xor rcx, rcx               ; _SIZE_T rcx = 0;
+_strlen_counter:              ; while (1) {
     inc rcx                    ;     rcx++
     cmp byte [rsi+rcx], 0      ;     if (rsi[rcx] != 0)
-    jnz __strlen_counter       ;         continue;
+    jnz _strlen_counter       ;         continue;
     retn                       ;     break;
                                ; }
 
 ; --------------------------------------------------------------------------------
-; (__CHAR *str: rax) substr(__CHAR *buffer: rsi, __SIZE_T start: rcx, __SIZE_T count: rdx);
+; (_CHAR *str: rax) substr(_CHAR *buffer: rsi, _SIZE_T start: rcx, _SIZE_T count: rdx);
 ;
 ; Description :
 ;
@@ -33,7 +33,7 @@ substr:
 
 
 ; --------------------------------------------------------------------------------
-; (__INT equality al) strcmp(__CHAR *s1: rsi, __CHAR s2: rdi);
+; (_INT equality al) strcmp(_CHAR *s1: rsi, _CHAR s2: rdi);
 ;
 ; Description :
 ;
@@ -45,17 +45,17 @@ substr:
 strcmp:
     xor rax, rax           ; size_t rax = 0;
     xor cl, cl             ; char cl;
-__strcmp_while:            ; while (1) {
+_strcmp_while:            ; while (1) {
     mov cl, [rsi+rax]      ;    cl = rsi[rax];
     cmp cl, 0              ;    if (cl == 0)
-    je __strcmp_ret_value  ;        goto __strcmp_ret_value;
+    je _strcmp_ret_value  ;        goto _strcmp_ret_value;
     cmp byte [rdi+rax], 0  ;    if (rdi[rax] == 0)
-    je __strcmp_ret_value  ;        goto __strcmp_ret_value;
+    je _strcmp_ret_value  ;        goto _strcmp_ret_value;
     cmp byte [rdi+rax], cl ;    if (rdi[rax] != cl)
-    jne __strcmp_ret_value ;        goto __strcmp_ret_value;
+    jne _strcmp_ret_value ;        goto _strcmp_ret_value;
     inc rax                ;    rax++;
-    jmp __strcmp_while     ; }
-__strcmp_ret_value:
+    jmp _strcmp_while     ; }
+_strcmp_ret_value:
     mov cl, [rsi+rax]      ; char cl = rsi[rax];
     sub cl, byte [rdi+rax] ; cl -= rdi[rax];
     mov al, cl             ; rax = cl;

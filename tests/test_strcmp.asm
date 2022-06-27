@@ -5,9 +5,9 @@ BITS 64
 section .data
     s1 db "Ceci est une phrase", 0
     s2 db "Ceci est une phras~", 0
-    is_equal db "_is_equal", 10, 0
-    is_less db "_is_less", 10, 0
-    is_greater db "_is_greater", 10, 0
+    is_equal db "String one is equal to string two.", 10, 0
+    is_less db "String one is less than string two.", 10, 0
+    is_greater db "String one is greater than string two.", 10, 0
 
 section .text
     global _start

@@ -1,7 +1,7 @@
 BITS 64
 
 ; --------------------------------------------------------------------------------
-; (__INT result rax) multiply(__INT number: rsi, __INT by: rdi);
+; (_INT result rax) multiply(_INT number: rsi, _INT by: rdi);
 ;
 ; Description :
 ;
@@ -10,17 +10,59 @@ BITS 64
 ; --------------------------------------------------------------------------------
 multiply:
     xor rax, rax
-__do_multiply:
+_do_multiply:
     cmp rdi, 0
-    jle __multiply_ret_value
+    jle _multiply_ret_value
     add rax, rsi
     dec rdi
-    jmp __do_multiply
-__multiply_ret_value:
+    jmp _do_multiply
+_multiply_ret_value:
     retn
 
 ; --------------------------------------------------------------------------------
-; (__INT result rax) pow(__INT number: rsi, __INT pow: rdi);
+; (_INT result rax) devide(_INT number: rsi, _INT by: rdi);
+;
+; Description :
+;
+; Compute the division of number (rsi) by (rdi). The result is stored in rax
+; register. If there is a division error, the rax register is unchanged.
+; --------------------------------------------------------------------------------
+divide:
+    cmp rdi, 0
+    je _devide_ret_value  ; Division by 0 error.
+    xor rax, rax
+_do_devide:
+    cmp rsi, rdi
+    jl _devide_ret_value
+    sub rsi, rdi
+    inc rax
+    jmp _do_devide
+_devide_ret_value:
+    retn
+
+; --------------------------------------------------------------------------------
+; (_INT result rax) modulo(_INT number: rsi, _INT by: rdi);
+;
+; Description :
+;
+; Compute the modulo of number (rsi) by (rdi). The result is stored in rax
+; register. If there is a modulo error, the rax register is unchanged.
+; --------------------------------------------------------------------------------
+modulo:
+    cmp rdi, 0
+    je _modulo_ret_value  ; Modulo by 0 error.
+    xor rax, rax
+_do_modulo:
+    cmp rsi, rdi
+    jl _modulo_ret_value
+    sub rsi, rdi
+    jmp _do_modulo
+_modulo_ret_value:
+    mov rax, rsi
+    retn
+
+; --------------------------------------------------------------------------------
+; (_INT result rax) pow(_INT number: rsi, _INT pow: rdi);
 ;
 ; Description :
 ;
@@ -30,11 +72,11 @@ __multiply_ret_value:
 pow:
     xor rax, rax
     cmp rdi, 0
-    jl __pow_ret_value
+    jl _pow_ret_value
     inc rax
-__pow_comparator:
+_pow_comparator:
     cmp rdi, 0
-    je __pow_ret_value
+    je _pow_ret_value
     dec rdi
     push rdi
     push rsi
@@ -43,6 +85,6 @@ __pow_comparator:
     call multiply
     pop rsi
     pop rdi
-    jmp __pow_comparator
-__pow_ret_value:
+    jmp _pow_comparator
+_pow_ret_value:
     retn

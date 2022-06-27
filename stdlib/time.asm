@@ -1,7 +1,7 @@
 BITS 64
 
 ; --------------------------------------------------------------------------------
-; void sleep(__INT ms: rax);
+; void sleep(_INT ms: rax);
 ;
 ; Description :
 ;
@@ -9,15 +9,14 @@ BITS 64
 ; --------------------------------------------------------------------------------
 sleep:
     push rax
-__sleep_count_all_ms:
+_sleep_count_all_ms:
     xor rax, rax
-__sleep_count_one_ms:
+_sleep_count_one_ms:
     inc rax
-    cmp rax, 3600000               ; ~ 1 millisecond
-    jne __sleep_count_one_ms
+    cmp rax, 3600000         ; 3.6*10^6 ~ 1 millisecond
+    jne _sleep_count_one_ms
     dec rcx
     cmp rcx, 0
-    jne __sleep_count_all_ms
-
+    jne _sleep_count_all_ms
     pop rax
     retn

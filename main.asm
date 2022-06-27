@@ -5,11 +5,11 @@ BITS 64
 section .data
     prompt_filename db "Enter a filename : ", 0
     data db "This is my file content", 0
+    data_len equ $-data * _CHAR
+    filename_len equ _CHAR * 261 ; filename can't exceed 255-260 characters.
 
 section .bss
-    filename_len equ __CHAR * 10
     filename resb filename_len
-    data_len equ __CHAR * 24
     file_data resb data_len
 
 section .text

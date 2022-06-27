@@ -1,12 +1,12 @@
 BITS 64
 
-__8BITS equ 0xff
-__16BITS equ 0xffff
-__32BITS equ 0xffffffff
-__64BITS equ 0xffffffffffffffff
+_8BITS equ 0xff
+_16BITS equ 0xffff
+_32BITS equ 0xffffffff
+_64BITS equ 0xffffffffffffffff
 
 ; --------------------------------------------------------------------------------
-; void exit(__EXIT_STATUS status: dil);
+; void exit(_EXIT_STATUS status: dil);
 ;
 ; Description :
 ;

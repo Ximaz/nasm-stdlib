@@ -27,7 +27,7 @@ _FS_LARGEFILE equ 0
 _FS_ERR_OPEN equ 0xfffffffffffffffe
 
 ; --------------------------------------------------------------------------------
-; (__INT fd: edi) open(__CHAR *path: rdi, O_[MODE] mode: rsi, __INT unix_permissions: dx);
+; (_INT fd: edi) open(_CHAR *path: rdi, O_[MODE] mode: rsi, _INT unix_permissions: dx);
 ;
 ; Description :
 ;
@@ -45,7 +45,7 @@ open:
     retn
 
 ; --------------------------------------------------------------------------------
-; (__INT err: rax) close(__INT fd: edi);
+; (_INT err: rax) close(_INT fd: edi);
 ;
 ; Dscription :
 ;
@@ -59,7 +59,7 @@ close:
     retn
 
 ; --------------------------------------------------------------------------------
-; (__SIZE_T written_bytes: rax) write(__INT fd: edi, __CHAR *buffer: rsi);
+; (_SIZE_T written_bytes: rax) write(_INT fd: edi, _CHAR *buffer: rsi);
 ;
 ; Description :
 ;
@@ -77,7 +77,7 @@ write:
     retn
 
 ; --------------------------------------------------------------------------------
-; (__INT read_bytes: rax) read(__CHAR *buffer: rsi, __INT fd: edi, __INT len: rdx);
+; (_INT read_bytes: rax) read(_CHAR *buffer: rsi, _INT fd: edi, _INT len: rdx);
 ;
 ; Description :
 ;
@@ -95,7 +95,7 @@ SEEK_CUR equ 1 ; Relative context.
 SEEK_END equ 2 ; EOF context.
 
 ; --------------------------------------------------------------------------------
-; (__OFF_T err: rax) lseek(__INT fd: edi, SEEK_<SET|CUR|END> context: dl, __OFF_T offset: rsi);
+; (_OFF_T err: rax) lseek(_INT fd: edi, SEEK_<SET|CUR|END> context: dl, _OFF_T offset: rsi);
 ;
 ; Description :
 ;

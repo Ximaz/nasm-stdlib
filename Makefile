@@ -5,7 +5,7 @@
 ## Compile the stdlib with an entry point file
 ##
 
-NAME=tests/test_strcmp
+NAME=main#tests/test_divide
 LIBNAME=stdlib
 NASM_FLAGS=-O0
 FMT=elf64# <- : obj, bin, elf, elf64, macho, macho64, etc...
