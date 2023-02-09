@@ -1,40 +1,42 @@
-##
-## Ximaz, 2022
-## Makefile
-## File description:
-## Compile the stdlib with an entry point file
-##
+NAME	=	main
 
-NAME=main#tests/test_divide
-LIBNAME=stdlib
-NASM_FLAGS=-O0
-FMT=elf64# <- : obj, bin, elf, elf64, macho, macho64, etc...
-DEBUG_FLAGS=-F stabs -g
-SRC=stdlib/fs.asm \
-	stdlib/io.asm \
-	stdlib/string.asm \
-	stdlib/sys.asm \
-	stdlib/syscalls_id.asm \
-	stdlib/types.asm
+# Linker	options :
+CC	=	ld
+CFLAGS	=	-g -O0 # -fno-builtin -fstack-protector		\
+		-fstack-protector-all -fsanitize=address	\
+		-fno-omit-frame-pointer # no-pie
 
-##
-## Building the project :
-##
+# NASM		options :
+ASM	=	nasm
+ASFLAGS	=	-g -O0 -felf64 # (obj, bin, elf, elf64, macho, macho64)
+ASRC	=	$(wildcard io/*.asm fs/*.asm stdlib/*.asm) main.asm
+AOBJ	=	$(ASRC:.asm=.o)
 
-$(NAME): $(NAME).o
-	ld $(NAME).o -O3 -o $(NAME)
+# Valgrind	options :
+VFLAGS	=	--track-origins=yes --show-leak-kinds=all	\
+		--leak-check=full -s --trace-children=yes	\
+		--read-inline-info=yes --read-var-info=yes	\
+		--errors-for-leak-kinds=all
 
-$(NAME).o: $(NAME).asm
-	nasm -f$(FMT) $(NASM_FLAGS) $(DEBUG_FLAGS) $(NAME).asm -o $(NAME).o
+TMP	=	$(NAME) $(wildcard *~)
 
-all: $(NAME)
+all:	$(NAME)
+
+%.o: %.asm
+	$(ASM) $(ASFLAGS) $< -o $@
+
+$(NAME):	$(AOBJ)
+	$(CC) $(CFLAGS) $(AOBJ) -o $(NAME)
+
+valgrind:	$(NAME)
+	valgrind $(VFLAGS) ./$(NAME)
 
 clean:
-	rm -rf $(NAME).o $(LIBNAME).o
+	rm -rf $(TMP)
 
-fclean: clean
-	rm -rf $(NAME)
+fclean:	clean
+	rm -rf $(OBJ) $(AOBJ)
 
-re: fclean all clean
+re:	fclean	all
 
-.PHONY: all clean fclean re
+.PHONY:	all	clean	fclean	re
