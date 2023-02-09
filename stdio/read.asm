@@ -5,6 +5,6 @@
     global read
 
 read:
-    mov ax, 0
+    mov eax, 0
     syscall
     ret

@@ -5,6 +5,6 @@
     global close
 
 close:
-    mov ax, 3
+    mov eax, 3
     syscall
     ret

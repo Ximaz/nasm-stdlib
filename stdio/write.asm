@@ -5,6 +5,6 @@
     global write
 
 write:
-    mov ax, 1
+    mov eax, 1
     syscall
     ret

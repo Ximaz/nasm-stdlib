@@ -5,6 +5,6 @@
     global open
 
 open:
-    mov ax, 2
+    mov eax, 2
     syscall
     ret

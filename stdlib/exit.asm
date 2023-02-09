@@ -5,6 +5,6 @@
     global exit
 
 exit:
-    mov ax, 60
+    mov eax, 60
     syscall
     ret
