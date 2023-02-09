@@ -9,7 +9,7 @@ CFLAGS	=	-g -O0 # -fno-builtin -fstack-protector		\
 # NASM		options :
 ASM	=	nasm
 ASFLAGS	=	-g -O0 -felf64 # (obj, bin, elf, elf64, macho, macho64)
-ASRC	=	$(wildcard io/*.asm fs/*.asm stdlib/*.asm) main.asm
+ASRC	=	$(wildcard io/*.asm fs/*.asm string/*.asm stdlib/*.asm) main.asm
 AOBJ	=	$(ASRC:.asm=.o)
 
 # Valgrind	options :

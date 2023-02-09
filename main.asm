@@ -9,6 +9,7 @@ length:   equ $ - content
 
     extern exit
     extern write
+    extern strlen
     extern open
     extern close
     extern O_CREAT, O_WRONLY
@@ -20,9 +21,13 @@ _start:
     mov dx,  0644o
     call open
 
-    mov rdi, rax
+    push rax
+    mov rdi, content
+    call strlen
+
+    pop rdi    
     mov rsi, content
-    mov rdx, length
+    mov rdx, rax
     call write
 
     call close
